@@ -19,22 +19,34 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: [
-      "http://localhost:5173",
-      "https://collaborative-music-rooms.vercel.app",
-      "https://collaborative-music-rooms-tharun-s-projects13.vercel.app"
-    ],
+   origin: (origin, callback) => {
+  if (
+    !origin ||
+    origin.includes("vercel.app") ||
+    origin === "http://localhost:5173"
+  ) {
+    callback(null, true);
+  } else {
+    callback(new Error("Not allowed"));
+  }
+},
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://collaborative-music-rooms.vercel.app",
-      "https://collaborative-music-rooms-tharun-s-projects13.vercel.app"
-    ],
+   origin: (origin, callback) => {
+  if (
+    !origin ||
+    origin.includes("vercel.app") ||
+    origin === "http://localhost:5173"
+  ) {
+    callback(null, true);
+  } else {
+    callback(new Error("Not allowed"));
+  }
+},
     credentials: true
   })
 );
