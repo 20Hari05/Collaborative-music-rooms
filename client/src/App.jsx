@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
-import Search from './pages/Search'
+import Search from './pages/search'
 import Room from './pages/Room'
 
 import ProtectedRoute from './components/ProtectedRoute'
