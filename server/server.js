@@ -19,34 +19,14 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-   origin: (origin, callback) => {
-  if (
-    !origin ||
-    origin.includes("vercel.app") ||
-    origin === "http://localhost:5173"
-  ) {
-    callback(null, true);
-  } else {
-    callback(new Error("Not allowed"));
-  }
-},
+   origin: true,
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 app.use(
   cors({
-   origin: (origin, callback) => {
-  if (
-    !origin ||
-    origin.includes("vercel.app") ||
-    origin === "http://localhost:5173"
-  ) {
-    callback(null, true);
-  } else {
-    callback(new Error("Not allowed"));
-  }
-},
+   origin: true,
     credentials: true
   })
 );
