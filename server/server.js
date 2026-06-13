@@ -17,18 +17,32 @@ const adminRoutes = require("./routes/admin");
 const onlineUsers = {}
 const app = express();
 const server = http.createServer(app);
+const corsOptions = {
+  origin: (origin, callback) => {
+
+    if (
+      !origin ||
+      origin === "http://localhost:5173" ||
+      (typeof origin === "string" &&
+       origin.includes("vercel.app"))
+    ) {
+      callback(null, true)
+    } else {
+      callback(
+        new Error("Not allowed by CORS")
+      )
+    }
+  },
+  credentials: true
+}
 const io = new Server(server, {
-  cors: {
-   origin: true,
-    methods: ["GET", "POST"],
-    credentials: true
+ cors: {
+    ...corsOptions,
+    methods: ["GET", "POST"]
   }
 });
 app.use(
-  cors({
-   origin: true,
-    credentials: true
-  })
+  cors(corsOptions)
 );
 app.use(express.json());
 

@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import supabase from '../services/supabase'
+import { useNavigate } from 'react-router-dom'
 
 function Signup() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
-
+  const navigate = useNavigate()
   const handleSignup = async (e) => {
 
     e.preventDefault()
@@ -74,6 +75,9 @@ function Signup() {
     console.log('User inserted successfully')
 
     setMessage('Signup successful')
+    setTimeout(() => {
+  navigate('/dashboard')
+}, 1000)
   }
 
   return (
